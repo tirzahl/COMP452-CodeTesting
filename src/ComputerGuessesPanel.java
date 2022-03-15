@@ -55,8 +55,6 @@ public class ComputerGuessesPanel extends JPanel {
 
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent e) {
-                computerGuesses.setLowerBound(1);
-                computerGuesses.setUpperBound(1000);
                 guessMessage.setText(generateMessage(computerGuesses.calculateGuess(0)));
             }
         });

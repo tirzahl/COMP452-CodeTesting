@@ -32,14 +32,6 @@ public class ComputerGuesses {
     public int getLastGuess(){
         return  lastGuess;
     }
-    public void setLowerBound(int lb){
-        lowerBound = lb;
-    }
-
-    public void setUpperBound(int ub){
-        upperBound = ub;
-    }
-
 
     public int getUpperBound(){
         return  upperBound;

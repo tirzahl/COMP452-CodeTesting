@@ -9,6 +9,13 @@ public class ComputerGueesesTest {
     private  final int UPPER_BOUND = 1000;
 
     @Test
+    void boundsSetProperly(){
+        ComputerGuesses GC = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
+        assertEquals(LOWER_BOUND,GC.getLowerBound());
+        assertEquals(UPPER_BOUND, GC.getUpperBound());
+    }
+
+    @Test
     void numGuessesIncrementsWithHigher(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
         assertEquals(CG.getNumGuesses(), 0);
@@ -25,10 +32,16 @@ public class ComputerGueesesTest {
     }
 
     @Test
+    void firstGuessIs501(){
+        ComputerGuesses GC = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
+        assertEquals(GC.calculateGuess(0), 501);
+    }
+
+    @Test
     void lowerBoundCanBeGuessed(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
         Boolean correctAnswer = false;
-        Boolean higher = false;
+        Boolean higher = false; //Always lower than guess because it's lowest bound
         int threshold = 20; //IF it isn't found in 20 guesses, something is wrong
         //This is exactly how actual code does it
         CG.calculateGuess(0);
@@ -43,7 +56,7 @@ public class ComputerGueesesTest {
     void upperBoundCanBeGuessed(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
         Boolean correctAnswer = false;
-        Boolean higher = true;
+        Boolean higher = true; //Always higher than guess, because it's upper bound
         int threshold = 20; //IF it isn't found in 20 guesses, something is wrong
         //This is exactly how actual code does it
         CG.calculateGuess(0);
@@ -89,5 +102,7 @@ public class ComputerGueesesTest {
             assertEquals(i, CG.getLastGuess());
         }
     }
+
+
 
 }
