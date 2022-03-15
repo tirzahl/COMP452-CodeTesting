@@ -68,7 +68,7 @@ public class GameOverPanel extends JPanel {
     /**
      * Sets the game results, updates the UI, and saves results to the log file (if human was playing)
      */
-    // TODO: refactor this method
+    // TODO: refactor this method DONE
     //As suggested by the summary above, refactor into three methods:
     //1. set the game results (leave in this method)
     //2. update the UI (call a new method)
