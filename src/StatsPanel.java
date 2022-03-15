@@ -37,29 +37,11 @@ public class StatsPanel extends JPanel {
         resultsPanel = new JPanel();
         resultsLabels = new ArrayList<>();
         resultsPanel.setLayout(new GridLayout(0, 2));
-        resultsPanel.add(new JLabel("Guesses"));
-        resultsPanel.add(new JLabel("Games"));
-        for(int binIndex=0; binIndex<BIN_EDGES.length; binIndex++){
-            String binName;
-            if(binIndex == BIN_EDGES.length-1){
-                // last bin
-                binName = BIN_EDGES[binIndex] + " or more";
-            }
-            else{
-                int upperBound = BIN_EDGES[binIndex+1] - 1;
-                if(upperBound > BIN_EDGES[binIndex]){
-                    binName = BIN_EDGES[binIndex] + "-" + upperBound;
-                }
-                else{
-                    binName = Integer.toString(BIN_EDGES[binIndex]);
-                }
-            }
-
-            resultsPanel.add(new JLabel(binName));
-            JLabel result = new JLabel("--");
-            resultsLabels.add(result);
-            resultsPanel.add(result);
-        }
+        addNewJLabelToResultsPanel("Guesses");
+        addNewJLabelToResultsPanel("Games");
+//        resultsPanel.add(new JLabel("Guesses"));
+//        resultsPanel.add(new JLabel("Games"));
+        setUpBins();
 
         resultsPanel.setMinimumSize(new Dimension(120, 120));
         this.add(resultsPanel);
@@ -86,6 +68,35 @@ public class StatsPanel extends JPanel {
         });
     }
 
+    private void addNewJLabelToResultsPanel(String labelName) {
+        resultsPanel.add(new JLabel(labelName));
+    }
+
+    private void setUpBins() {
+        for(int binIndex=0; binIndex<BIN_EDGES.length; binIndex++){
+            String binName;
+            if(binIndex == BIN_EDGES.length-1){
+                // last bin
+                binName = BIN_EDGES[binIndex] + " or more";
+            }
+            else{
+                int upperBound = BIN_EDGES[binIndex+1] - 1;
+                if(upperBound > BIN_EDGES[binIndex]){
+                    binName = BIN_EDGES[binIndex] + "-" + upperBound;
+                }
+                else{
+                    binName = Integer.toString(BIN_EDGES[binIndex]);
+                }
+            }
+
+            addNewJLabelToResultsPanel(binName);
+//            resultsPanel.add(new JLabel(binName));
+            JLabel result = new JLabel("--");
+            resultsLabels.add(result);
+            resultsPanel.add(result);
+        }
+    }
+
 
     private void clearResults(){
         for(JLabel lbl : resultsLabels){
@@ -93,7 +104,7 @@ public class StatsPanel extends JPanel {
         }
     }
 
-    //maybe refactor out the UI control (setting the results label)
+    //Is there a way to factor out the UI control?
     private void updateResultsPanel(){
         clearResults();
 
