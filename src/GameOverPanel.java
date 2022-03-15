@@ -69,9 +69,19 @@ public class GameOverPanel extends JPanel {
      * Sets the game results, updates the UI, and saves results to the log file (if human was playing)
      */
     // TODO: refactor this method
+    //As suggested by the summary above, refactor into three methods:
+    //1. set the game results (leave in this method)
+    //2. update the UI (call a new method)
+    //3. save the results to the log file (call a new method
     public void setGameResults(GameResult result){
         this.gameResult = result;
 
+        setGameResultInUI(result);
+
+        writeGameResultToFile(result);
+    }
+
+    public void setGameResultInUI(GameResult result) {
         answerTxt.setText("The answer was " + result.correctValue + ".");
         if(result.numGuesses == 1){
             numGuessesTxt.setText((result.humanWasPlaying ? "You" : "I") + " guessed it on the first try!");
@@ -79,7 +89,9 @@ public class GameOverPanel extends JPanel {
         else {
             numGuessesTxt.setText("It took " + (result.humanWasPlaying ? "you" : "me") + " " + result.numGuesses + " guesses.");
         }
+    }
 
+    public void writeGameResultToFile(GameResult result) {
         if(result.humanWasPlaying){
             // write stats to file
             try(CSVWriter writer = new CSVWriter(new FileWriter(StatsFile.FILENAME, true))) {
