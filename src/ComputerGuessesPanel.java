@@ -13,8 +13,6 @@ import java.util.function.Consumer;
 public class ComputerGuessesPanel extends JPanel {
     private ComputerGuesses computerGuesses;
 
-    private int numGuesses;
-    private int lastGuess;
 
     // upperBound and lowerBound track the computer's knowledge about the correct number
     // They are updated after each guess is made
@@ -42,7 +40,8 @@ public class ComputerGuessesPanel extends JPanel {
 
         JButton correctBtn = new JButton("Equal");
         correctBtn.addActionListener(e -> {
-            gameOver(cardsPanel, gameFinishedCallback, guessMessage);
+            gameOver(cardsPanel, gameFinishedCallback, guessMessage, computerGuesses);
+            computerGuesses = new ComputerGuesses(0,1,1000);
         });
         addButton(correctBtn,10);
 
@@ -68,11 +67,11 @@ public class ComputerGuessesPanel extends JPanel {
     }
 
 
-    private void gameOver(JPanel cardsPanel, Consumer<GameResult> gameFinishedCallback, JLabel guessMessage) {
+    private void gameOver(JPanel cardsPanel, Consumer<GameResult> gameFinishedCallback, JLabel guessMessage, ComputerGuesses CG) {
         guessMessage.setText("I guess ___.");
 
         // Send the result of the finished game to the callback
-        GameResult result = new GameResult(false, lastGuess, numGuesses);
+        GameResult result = new GameResult(false, CG.getLastGuess(), CG.getNumGuesses());
         gameFinishedCallback.accept(result);
 
         CardLayout cardLayout = (CardLayout) cardsPanel.getLayout();

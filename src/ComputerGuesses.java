@@ -29,6 +29,9 @@ public class ComputerGuesses {
         return lastGuess;
     }
 
+    public int getLastGuess(){
+        return  lastGuess;
+    }
     public void setLowerBound(int lb){
         lowerBound = lb;
     }
