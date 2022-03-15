@@ -15,15 +15,16 @@ public class HumanGuessesGame {
 
     //TODO: DONE
     // overload this method and have the one that doesn't take in a parameter, construct a random and pass it to the other
-    HumanGuessesGame(){
-        Random randGen = new Random();
+    HumanGuessesGame(Random randGen) {
         this.target = randGen.nextInt(UPPER_BOUND) + 1;
 
         numGuesses = 0;
         gameIsDone = false;
     }
 
-    HumanGuessesGame(Random randGen) {
+
+    HumanGuessesGame(){
+        Random randGen = new Random();
         this.target = randGen.nextInt(UPPER_BOUND) + 1;
 
         numGuesses = 0;
@@ -50,4 +51,6 @@ public class HumanGuessesGame {
     boolean isDone(){
         return gameIsDone;
     }
+
+    int getTarget() {return target;}
 }
