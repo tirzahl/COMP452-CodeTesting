@@ -30,8 +30,10 @@ public class StatsFile extends GameStats {
             while ((values = csvReader.readNext()) != null) {
                 // values should have the date and the number of guesses as the two fields
                 try {
-                    LocalDateTime timestamp = LocalDateTime.parse(values[0]);
-                    int numGuesses = Integer.parseInt(values[1]);
+                    LocalDateTime timestamp = StatsFileHelper.parseTimestamp(values[0]);
+//                    LocalDateTime timestamp = LocalDateTime.parse(values[0]);
+                    int numGuesses = StatsFileHelper.getNumGuesses(values[1]);
+//                    int numGuesses = Integer.parseInt(values[1]);
 
                     if (timestamp.isAfter(limit)) {
                         statsMap.put(numGuesses, 1 + statsMap.getOrDefault(numGuesses, 0));
@@ -64,4 +66,22 @@ public class StatsFile extends GameStats {
     public int maxNumGuesses(){
         return (statsMap.isEmpty() ? 0 : statsMap.lastKey());
     }
+
+//    public LocalDateTime parseTimestamp(String value0) {
+//        try {
+//            return LocalDateTime.parse(value0);
+//        } catch (DateTimeParseException dtpe) {
+//            dtpe.printStackTrace();
+//            return null;
+//        }
+//    }
+//
+//    public int getNumGuesses(String value1) {
+//        try {
+//            return Integer.parseInt(value1);
+//        } catch (NumberFormatException nfe) {
+//            nfe.printStackTrace();
+//            return -1;
+//        }
+//    }
 }
