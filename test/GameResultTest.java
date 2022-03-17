@@ -10,8 +10,8 @@ public class GameResultTest {
     @Test
     void testConstructor(){
         GameResult GR = new GameResult(true, 500, 1);
-        assertEquals(GR.getNumGuesses(),1);
+        assertEquals(1,GR.getNumGuesses());
         assertTrue(GR.getHumanWasPlaying());
-        assertEquals(GR.getCorrectValue(),500);
+        assertEquals(500,GR.getCorrectValue());
     }
 }
