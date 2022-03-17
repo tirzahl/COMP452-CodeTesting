@@ -11,13 +11,8 @@ import java.util.function.Consumer;
  * TODO: refactor this class -> Refactored
  */
 public class ComputerGuessesPanel extends JPanel {
-    private ComputerGuesses computerGuesses;
 
-
-    // upperBound and lowerBound track the computer's knowledge about the correct number
-    // They are updated after each guess is made
-    private int upperBound; // correct number is <= upperBound
-    private int lowerBound; // correct number is >= lowerBound
+    private ComputerGuesses computerGuesses; //Logic Class
 
     public ComputerGuessesPanel(JPanel cardsPanel, Consumer<GameResult> gameFinishedCallback){
         computerGuesses = new ComputerGuesses(0,1,1000);
