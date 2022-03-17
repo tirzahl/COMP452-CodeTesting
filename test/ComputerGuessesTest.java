@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ComputerGueesesTest {
+public class ComputerGuessesTest {
     private final int LOWER_BOUND = 1;
     private  final int UPPER_BOUND = 1000;
 
@@ -18,23 +18,23 @@ public class ComputerGueesesTest {
     @Test
     void numGuessesIncrementsWithHigher(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
-        assertEquals(CG.getNumGuesses(), 0);
+        assertEquals(0, CG.getNumGuesses());
         CG.calculateGuess(true,1);
-        assertEquals(CG.getNumGuesses(), 1);
+        assertEquals(1,CG.getNumGuesses());
     }
 
     @Test
     void numGuessesIncrememntsWithLower(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
-        assertEquals(CG.getNumGuesses(),0);
+        assertEquals(0,CG.getNumGuesses());
         CG.calculateGuess(false, 1);
-        assertEquals(CG.getNumGuesses(), 1);
+        assertEquals(1, CG.getNumGuesses());
     }
 
     @Test
     void firstGuessIs501(){
         ComputerGuesses GC = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
-        assertEquals(GC.calculateGuess(0), 501);
+        assertEquals(501, GC.calculateGuess(0));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ComputerGueesesTest {
             int guess = CG.calculateGuess(higher, 1);
             correctAnswer = guess == 1;
         }
-        assertEquals(CG.getLastGuess(),LOWER_BOUND);
+        assertEquals(LOWER_BOUND,CG.getLastGuess());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ComputerGueesesTest {
             int guess = CG.calculateGuess(higher, 1);
             correctAnswer = guess == UPPER_BOUND;
         }
-        assertEquals(CG.getLastGuess(),UPPER_BOUND);
+        assertEquals(UPPER_BOUND,CG.getLastGuess());
     }
 
     @Test
