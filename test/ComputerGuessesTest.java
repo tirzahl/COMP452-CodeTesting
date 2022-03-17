@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ComputerGueesesTest {
+public class ComputerGuessesTest {
     private final int LOWER_BOUND = 1;
     private  final int UPPER_BOUND = 1000;
 
