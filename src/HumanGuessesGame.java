@@ -52,5 +52,7 @@ public class HumanGuessesGame {
         return gameIsDone;
     }
 
-    int getTarget() {return target;}
+    int getTarget() { return target; }
+
+    int getUpperBound() { return UPPER_BOUND; }
 }
