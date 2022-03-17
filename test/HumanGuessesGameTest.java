@@ -13,7 +13,7 @@ public class HumanGuessesGameTest {
         RandomTestStub myRandTestStub = new RandomTestStub(500);
         HumanGuessesGame myHGGTest = new HumanGuessesGame(myRandTestStub);
         assertEquals(0, myHGGTest.getNumGuesses());
-        assertEquals(false, myHGGTest.isDone());
+        assertFalse(myHGGTest.isDone());
         assertEquals(500, myHGGTest.getTarget());
     }
 
@@ -79,7 +79,7 @@ public class HumanGuessesGameTest {
         RandomTestStub myRandTestStub = new RandomTestStub(325);
         HumanGuessesGame HGG = new HumanGuessesGame(myRandTestStub);
         HGG.makeGuess(325);
-        assertEquals(true, HGG.isDone());
+        assertTrue(HGG.isDone());
     }
 
 

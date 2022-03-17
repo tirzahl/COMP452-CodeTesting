@@ -66,39 +66,36 @@ public class GameOverPanel extends JPanel {
     }
 
     /**
-     * Sets the game results, updates the UI, and saves results to the log file (if human was playing)
+     * Sets the game results
      */
-    // TODO: refactor this method DONE
-    //As suggested by the summary above, refactor into three methods:
-    //1. set the game results (leave in this method)
-    //2. update the UI (call a new method)
-    //3. save the results to the log file (call a new method
     public void setGameResults(GameResult result){
         this.gameResult = result;
-
-        setGameResultInUI(result);
-
-        writeGameResultToFile(result);
     }
 
-    public void setGameResultInUI(GameResult result) {
-        answerTxt.setText("The answer was " + result.getCorrectValue() + ".");
-        if(result.getNumGuesses() == 1){
-            numGuessesTxt.setText((result.getHumanWasPlaying() ? "You" : "I") + " guessed it on the first try!");
+    /**
+     * Updates the UI
+     */
+    public void setGameResultInUI() {
+        answerTxt.setText("The answer was " + this.gameResult.getCorrectValue() + ".");
+        if(this.gameResult.getNumGuesses() == 1){
+            numGuessesTxt.setText((this.gameResult.getHumanWasPlaying() ? "You" : "I") + " guessed it on the first try!");
         }
         else {
-            numGuessesTxt.setText("It took " + (result.getHumanWasPlaying() ? "you" : "me") + " " + result.getNumGuesses() + " guesses.");
+            numGuessesTxt.setText("It took " + (this.gameResult.getHumanWasPlaying() ? "you" : "me") + " " + this.gameResult.getNumGuesses() + " guesses.");
         }
     }
 
-    public void writeGameResultToFile(GameResult result) {
-        if(result.getHumanWasPlaying()){
+    /**
+     * Saves results to the log file (if human was playing)
+     */
+    public void writeGameResultToFile() {
+        if(this.gameResult.getHumanWasPlaying()){
             // write stats to file
             try(CSVWriter writer = new CSVWriter(new FileWriter(StatsFile.FILENAME, true))) {
 
                 String [] record = new String[2];
                 record[0] = LocalDateTime.now().toString();
-                record[1] = Integer.toString(result.getNumGuesses());
+                record[1] = Integer.toString(this.gameResult.getNumGuesses());
 
                 writer.writeNext(record);
             } catch (IOException e) {
