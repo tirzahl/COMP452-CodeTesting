@@ -13,8 +13,7 @@ public class HumanGuessesGame {
     private int numGuesses;
     private boolean gameIsDone; // true iff makeGuess has been called with the target value
 
-    //TODO: DONE
-    // overload this method and have the one that doesn't take in a parameter, construct a random and pass it to the other
+
     HumanGuessesGame(Random randGen) {
         this.target = randGen.nextInt(UPPER_BOUND) + 1;
 
