@@ -14,12 +14,12 @@ public class StatsPanel extends JPanel {
 
     // Stats will display the number of games in each "bin"
     // A bin goes from BIN_EDGES[i] through BIN_EDGES[i+1]-1, inclusive
-    private static final int [] BIN_EDGES = {1, 2, 4, 6, 8, 10, 12, 14};
+    private Bins bins;
     private ArrayList<JLabel> resultsLabels;
 
 
     public StatsPanel(JPanel cardsPanel) {
-
+        bins = new Bins();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JLabel title = new JLabel("Your Stats");
@@ -37,8 +37,8 @@ public class StatsPanel extends JPanel {
         resultsPanel.setLayout(new GridLayout(0, 2));
         resultsPanel.add(new JLabel("Guesses"));
         resultsPanel.add(new JLabel("Games"));
-        for(int binIndex=0; binIndex<BIN_EDGES.length; binIndex++){
-            String binName = setUpBin(binIndex);
+        for(int binIndex=0; binIndex<bins.getBinsLength(); binIndex++){
+            String binName = bins.setUpBin(binIndex);
 
             resultsPanel.add(new JLabel(binName));
             JLabel result = new JLabel("--");
@@ -71,23 +71,7 @@ public class StatsPanel extends JPanel {
         });
     }
 
-    private String setUpBin(int binIndex) {
-        String binName;
-        if(binIndex == BIN_EDGES.length-1){
-            // last bin
-            binName = BIN_EDGES[binIndex] + " or more";
-        }
-        else{
-            int upperBound = BIN_EDGES[binIndex+1] - 1;
-            if(upperBound > BIN_EDGES[binIndex]){
-                binName = BIN_EDGES[binIndex] + "-" + upperBound;
-            }
-            else{
-                binName = Integer.toString(BIN_EDGES[binIndex]);
-            }
-        }
-        return binName;
-    }
+
 
 
     private void clearResults(){
@@ -101,26 +85,12 @@ public class StatsPanel extends JPanel {
 
         GameStats stats = new StatsFile();
 
-        for(int binIndex=0; binIndex<BIN_EDGES.length; binIndex++){
-            final int lowerBound = BIN_EDGES[binIndex];
-            int numGames = 0;
-
-            if(binIndex == BIN_EDGES.length-1){
-                // last bin
-                // Sum all the results from lowerBound on up
-                for(int numGuesses=lowerBound; numGuesses<stats.maxNumGuesses(); numGuesses++){
-                    numGames += stats.numGames(numGuesses);
-                }
-            }
-            else{
-                int upperBound = BIN_EDGES[binIndex+1];
-                for(int numGuesses=lowerBound; numGuesses <= upperBound; numGuesses++) {
-                    numGames += stats.numGames(numGuesses);
-                }
-            }
+        for(int binIndex=0; binIndex<bins.getBinsLength(); binIndex++){
+            int numGames = bins.getGamesInBin(stats, binIndex);
 
             JLabel resultLabel = resultsLabels.get(binIndex);
             resultLabel.setText(Integer.toString(numGames));
         }
     }
 }
+
