@@ -8,6 +8,7 @@ public class HumanGuessesGameTest {
     private  final int UPPER_BOUND = 1000;
     private final GuessResult CorrectGR = GuessResult.CORRECT;
 
+    //using dependency injection
     @Test
     void setUpCorrectly() {
         RandomTestStub myRandTestStub = new RandomTestStub(500);

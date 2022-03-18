@@ -1,1 +1,2 @@
-Put your JUnit test classes and test doubles in this folder.
+Luke Greenway and Tirzah Lloyd worked together on this project.
+
