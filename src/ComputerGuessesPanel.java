@@ -50,6 +50,8 @@ public class ComputerGuessesPanel extends JPanel {
 
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent e) {
+                //How original code's logic was
+                //This is a bug
                 guessMessage.setText(generateMessage(computerGuesses.calculateGuess(0)));
             }
         });

@@ -38,6 +38,16 @@ public class ComputerGuessesTest {
     }
 
     @Test
+    void firstGuessCountsAsAGuess(){
+        //Computer acts as if guessing 500 isn't a first guess
+        //NOTE: THIS IS AN EXACT COPY OF THE LOGIC FROM COMPUTERGUESSESPANEL
+        ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
+        //I understand I should have increment set to 1. But OG code isn't like that
+        CG.calculateGuess(0);
+        assertEquals(1,CG.getNumGuesses());
+    }
+
+    @Test
     void lowerBoundCanBeGuessed(){
         ComputerGuesses CG = new ComputerGuesses(0,LOWER_BOUND,UPPER_BOUND);
         Boolean correctAnswer = false;
